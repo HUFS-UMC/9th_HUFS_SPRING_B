@@ -6,7 +6,6 @@ plugins {
 
 group = 'com.umcseoul'
 version = '0.0.1-SNAPSHOT'
-description = '9TH_SPRING_B'
 
 java {
     toolchain {
@@ -22,6 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 tasks.named('test') {
