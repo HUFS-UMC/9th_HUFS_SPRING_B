@@ -1,9 +1,11 @@
 package com.spring_b.thousandhyehyang.mission.entity;
 
+import com.spring_b.thousandhyehyang.global.entity.BaseEntity;
 import com.spring_b.thousandhyehyang.mission.enums.MissionStatus;
 import com.spring_b.thousandhyehyang.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.EqualsAndHashCode;
 
 import java.time.Instant;
 
@@ -14,7 +16,8 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserMission {
+@EqualsAndHashCode(callSuper = true)
+public class UserMission extends BaseEntity {
     
     @EmbeddedId
     private UserMissionId id;
