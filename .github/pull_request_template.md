@@ -14,6 +14,27 @@
     - @CreatedDate, @LastModifiedDate를 활용하여 자동으로 기록
     - deletedAt 필드를 추가하여 Soft Delete 구조도 구성
 
+2. 도메인 엔티티 설계
+
+- User 도메인
+    - User: 기본 회원 정보 관리
+    - PreferredFood: 사용자-음식 선호 관계
+    - Food: 음식명 관리
+    - UserMission: 사용자 미션 진행 내역 (N:1, 상태 Enum 관리)
+    - UserStatus enum 추가
+- Mission 도메인
+  - Mission: 가게별 미션 정보 관리
+  - MissionStatus: 미션 상태 Enum
+  - 
+- point 도메인
+  - Mission, Review, Store 모두에서 포인트가 발생하므로 별도의 point 도메인으로 분리
+  - PointHistory 엔티티 생성(amountPoint, content, changeType)
+  - 연관관계: User (N:1), Store (N:1)
+- Store 도메인
+  - 속성: name, address, latitude, longitude
+  - PointHistory -> Store 단방향 참조로 단순화
+
+
 ## 💡 과제 피드백 Suggestion
 - 과제 풀이/코드 관련 피드백이나 배운 점을 적어주세요.
 - 필요하다면 스크린샷을 첨부해주세요.
