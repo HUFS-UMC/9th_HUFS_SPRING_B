@@ -19,7 +19,7 @@ public class Review extends BaseEntity {
     private Long id;
 
     // 평점 (소수점 1자리까지)
-    @Column(nullable = false, precision = 2, scale = 1)
+    @Column(nullable = false, precision = 2)
     private Double rating;
 
     // 리뷰 내용

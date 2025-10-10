@@ -26,10 +26,10 @@ public class Store extends BaseEntity {
     @Column(length = 40, nullable = false)
     private String address;
 
-    @Column(precision = 10, scale = 7) // scale == 정밀도
+    @Column(precision = 10)// scale == 정밀도
     private Double latitude;
 
-    @Column(precision = 10, scale = 7)
+    @Column(precision = 10)
     private Double longitude;
 
     // 리뷰 (1:N) 일단 주석처리

@@ -22,7 +22,7 @@
     - Food: 음식명 관리
     - UserMission: 사용자 미션 진행 내역 (N:1, 상태 Enum 관리)
     - UserStatus enum 추가
-    - SocialAccount(소셜 로그인), UserContent(동의), UserAlarm(알람)
+    - SocialAccount(소셜 로그인), UserContent(회원가입시 동의), UserAlarm(알람)
 
 - Mission 도메인
   - Mission: 가게별 미션 정보 관리
@@ -53,14 +53,18 @@
     - 이번 과제를 진행하면서 @Builder를 사용할 때, 컬렉션(List, Set 등) 필드가 초기화되지 않는 문제를 경험.  
 @Builder는 기본값 초기화를 무시하기 때문에, new ArrayList<>()로 직접 초기화한 필드가 null로 생성되는 경우가 있음
 @Builder.Default를 사용하여 해결
-- 
-- 과제 풀이/코드 관련 피드백이나 배운 점을 적어주세요.
-- 필요하다면 스크린샷을 첨부해주세요.
+
 
 ## 🔗 관련 이슈
 1. ERD review_answer 
     Q. review_answer와 user를 N:1 관계로 연결이 맞을까?
     A. 둘다 리뷰 답변이 가능 하도록 하려면 이렇게가 맞을 수 있으나 너무 복잡도가 높음
        사장님만 답변이 가능한 설계로 하여 ERD 수정
-- Close #이슈번호
-- (연결된 이슈가 없으면 'N/A'라고 적어주세요.)
+=======
+
+2. H2 
+- H2 (그리고 MySQL, PostgreSQL 등 대부분의 DB)는 USER가 내부적으로 이미 존재하는 시스템 테이블 / 예약어 라고함.
+   → 그래서 Hibernate가 user라는 테이블을 만들거나 조작하려 하면 SQL 파서가 혼동해버림.  → 복수형 사용해서 해결
+
+## 🔗 관련 이슈
+
