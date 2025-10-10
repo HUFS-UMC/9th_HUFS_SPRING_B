@@ -22,6 +22,8 @@
     - Food: 음식명 관리
     - UserMission: 사용자 미션 진행 내역 (N:1, 상태 Enum 관리)
     - UserStatus enum 추가
+    - SocialAccount(소셜 로그인)
+    - UserContent(동의)
 - Mission 도메인
   - Mission: 가게별 미션 정보 관리
   - MissionStatus: 미션 상태 Enum
