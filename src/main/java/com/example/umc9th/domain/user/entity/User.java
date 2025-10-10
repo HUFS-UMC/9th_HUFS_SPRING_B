@@ -42,7 +42,8 @@ public class User extends BaseEntity {
     @Column(name = "phone_number", length = 15, nullable = false)
     private String phoneNumber;
 
-    // 🔹 연관관계 설정 (1:N)
+    // 연관관계 설정 (1:N)
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<PreferredFood> preferredFoods = new ArrayList<>();
 
