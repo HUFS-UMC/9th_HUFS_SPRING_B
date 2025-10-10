@@ -1,6 +1,7 @@
 package com.example.umc9th.domain.user.entity;
 
 import com.example.umc9th.domain.user.entity.mapping.PreferredFood;
+import com.example.umc9th.domain.user.entity.mapping.UserMission;
 import com.example.umc9th.domain.user.enums.Gender;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -44,6 +45,10 @@ public class User extends BaseEntity {
     // 🔹 연관관계 설정 (1:N)
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<PreferredFood> preferredFoods = new ArrayList<>();
+
+    // 단방향 연관관계를 위해 주석처리
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    private List<UserMission> userMissions = new ArrayList<>();
 
     // 편의 메서드
     public void addPreferredFood(PreferredFood preferredFood) {
