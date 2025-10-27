@@ -32,6 +32,9 @@ public class Store extends BaseEntity {
     @Column(precision = 10)
     private Double longitude;
 
+    @Column(length = 30, nullable = false)
+    private String region;
+
     // 리뷰 (1:N) 일단 주석처리
     // @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
     //  private List<Review> reviews = new ArrayList<>();
