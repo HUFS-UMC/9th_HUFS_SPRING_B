@@ -5,6 +5,7 @@ import com.example.umc9th.domain.user.enums.FoodName;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +26,7 @@ public class Food extends BaseEntity {
     @Column(name = "name", nullable = false, length = 20)
     private FoodName name;
 
-    // 🔹 연관관계 (1:N)
-    @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "food", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
     private List<PreferredFood> preferredFoods = new ArrayList<>();
 }

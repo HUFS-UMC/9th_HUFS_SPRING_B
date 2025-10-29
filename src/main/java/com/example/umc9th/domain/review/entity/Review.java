@@ -6,6 +6,9 @@ import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -25,6 +28,16 @@ public class Review extends BaseEntity {
     // 리뷰 내용
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
+    // 리뷰 이미지 (1:N)
+    @OneToMany(mappedBy = "review", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ReviewImage> reviewImages = new ArrayList<>();
+
+    //리뷰 답변 (1:N)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ReviewAnswer> reviewAnswers = new ArrayList<>();
 
     // 작성자 (N:1)
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,7 @@
 package com.example.umc9th.domain.user.entity;
 
+import com.example.umc9th.domain.point.entity.PointHistory;
+import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.user.entity.mapping.PreferredFood;
 import com.example.umc9th.domain.user.entity.mapping.UserMission;
 import com.example.umc9th.domain.user.enums.Gender;
@@ -41,4 +43,39 @@ public class User extends BaseEntity {
 
     @Column(name = "phone_number", length = 15, nullable = false)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
+    private List<PreferredFood> preferredFoods = new ArrayList<>();
+
+    // cascade 고려?
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
+    private List<UserMission> userMissions = new ArrayList<>();
+
+    //
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
+    // 단방향 1:1 (User → UserConsent)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_consent_id", foreignKey = @ForeignKey(name = "fk_user_user_consent"))
+    private UserConsent userConsent;
+
+    // cascade는 일단 안함
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<UserAlarm> userAlarms = new ArrayList<>();
+
+    // 1:n pointHistory
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<PointHistory> pointHistories = new ArrayList<>();
+
+    // --- 편의 메서드 ---
+    public void addPreferredFood(PreferredFood preferredFood) {
+        preferredFoods.add(preferredFood);
+    }
+
+    public void removePreferredFood(PreferredFood preferredFood) {
+        preferredFoods.remove(preferredFood);
+    }
 }

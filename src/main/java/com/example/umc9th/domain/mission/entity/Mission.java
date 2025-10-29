@@ -33,7 +33,7 @@ public class Mission extends BaseEntity {
     private Store store;
 
     // UserMission (1:N)
-    // 단방향 연관관계를 위해 주석처리
-//   @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<UserMission> userMissions = new ArrayList<>();
+    //
+    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserMission> userMissions = new ArrayList<>();
 }

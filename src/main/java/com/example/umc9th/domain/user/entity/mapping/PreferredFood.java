@@ -18,12 +18,12 @@ public class PreferredFood extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 🔹 User (N:1)
+    //  User (N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    // 🔹 Food (N:1)
+    //  Food (N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_id")
     private Food food;

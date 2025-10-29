@@ -25,8 +25,4 @@ public class UserConsent extends BaseEntity {
     @Column(name = "marketing_agree", nullable = false)
     private Boolean marketingAgree;
 
-    // N:1 관계
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 }
