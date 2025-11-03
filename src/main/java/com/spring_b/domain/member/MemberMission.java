@@ -1,34 +1,31 @@
-package com.spring_b.domain.review.entity;
+package umc.demo.domain.member;
 
-
-import com.spring_b.domain.common.BaseEntity;
-import com.spring_b.domain.member.entity.Member;
-import com.spring_b.domain.store.entity.Store;
 import jakarta.persistence.*;
 import lombok.*;
+import umc.demo.domain.common.BaseEntity;
+import umc.demo.domain.mission.Mission;
+import umc.demo.domain.mission.MissionStatus;
+
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Review extends BaseEntity {
+public class MemberMission extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    private Float score;
-
-    private String body;
+    @Enumerated(EnumType.STRING)
+    private MissionStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
-    private Store store;
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 }

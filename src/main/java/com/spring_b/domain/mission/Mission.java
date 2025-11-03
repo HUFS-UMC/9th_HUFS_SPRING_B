@@ -1,10 +1,10 @@
-package com.spring_b.domain.mission.entity;
+package umc.demo.domain.mission;
 
 
-import com.spring_b.domain.mapping.MemberMission;
-import com.spring_b.domain.store.entity.Store;
 import jakarta.persistence.*;
 import lombok.*;
+import umc.demo.domain.member.MemberMission;
+import umc.demo.domain.store.Store;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

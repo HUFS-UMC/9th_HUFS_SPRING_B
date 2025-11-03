@@ -1,11 +1,9 @@
-package com.spring_b.domain.mapping;
+package umc.demo.domain.member;
 
-import com.spring_b.domain.common.BaseEntity;
-import com.spring_b.domain.member.entity.Member;
-import com.spring_b.domain.member.entity.Terms;
 import jakarta.persistence.*;
 import lombok.*;
-
+import umc.demo.domain.common.BaseEntity;
+import umc.demo.domain.food.FoodCategory;
 
 
 @Entity
@@ -13,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class MemberAgree extends BaseEntity {
+public class MemberPrefer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +22,7 @@ public class MemberAgree extends BaseEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "terms_id")
-    private Terms terms;
-
+    @JoinColumn(name = "category_id")
+    private FoodCategory foodCategory;
 
 }

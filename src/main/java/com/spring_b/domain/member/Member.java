@@ -1,20 +1,18 @@
-package com.spring_b.domain.member.entity;
+package umc.demo.domain.member;
 
-import com.spring_b.domain.common.BaseEntity;
-import com.spring_b.domain.mapping.MemberAgree;
-import com.spring_b.domain.mapping.MemberMission;
-import com.spring_b.domain.mapping.MemberPrefer;
-import com.spring_b.domain.member.enums.Gender;
-import com.spring_b.domain.member.enums.MemberStatus;
-import com.spring_b.domain.member.enums.Role;
-import com.spring_b.domain.member.enums.SocialType;
-import com.spring_b.domain.mission.enums.MissionStatus;
-import com.spring_b.domain.review.entity.Review;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import umc.demo.domain.common.BaseEntity;
+import umc.demo.domain.member.enums.Gender;
+import umc.demo.domain.member.enums.MemberStatus;
+import umc.demo.domain.member.enums.Role;
+import umc.demo.domain.member.enums.SocialType;
+import umc.demo.domain.mission.MissionStatus;
+import umc.demo.domain.review.Review;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,4 +76,10 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
 
+    public void encodePassword(String password) {
+        this.password = password;
+    }
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberFood> memberFoods = new ArrayList<>();
 }

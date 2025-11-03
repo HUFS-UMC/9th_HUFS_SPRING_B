@@ -1,15 +1,15 @@
-package com.spring_b.domain.store.entity;
-
+package umc.demo.domain.food;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Store {
+public class FoodCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +17,6 @@ public class Store {
 
     private String name;
 
-    private String address;
-
-    private Float score;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
-    private Region region;
 
 }
+

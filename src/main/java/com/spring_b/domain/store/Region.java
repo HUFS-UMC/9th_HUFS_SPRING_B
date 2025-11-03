@@ -1,4 +1,4 @@
-package com.spring_b.domain.store.entity;
+package umc.demo.domain.store;
 
 
 import jakarta.persistence.*;

@@ -1,6 +1,5 @@
-package com.spring_b.domain.member.entity;
+package umc.demo.domain.member;
 
-import com.spring_b.domain.mapping.MemberAgree;
 import jakarta.persistence.*;
 import lombok.*;
 

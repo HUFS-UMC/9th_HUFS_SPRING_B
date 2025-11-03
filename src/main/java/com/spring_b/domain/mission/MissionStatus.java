@@ -1,4 +1,4 @@
-package com.spring_b.domain.mission.enums;
+package umc.demo.domain.mission;
 
 public enum MissionStatus {
     CHALLENGING, COMPLETE
