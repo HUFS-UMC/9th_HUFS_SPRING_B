@@ -39,6 +39,10 @@ public class UserAlarm extends BaseEntity {
     @Column(name = "read_at")
     private LocalDateTime readAt;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     // 편의 메서드
     public void markAsRead() {
         this.isRead = true;
