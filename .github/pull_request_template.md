@@ -23,3 +23,11 @@
 | ReviewRepository | domain.review.repository | 리뷰 데이터 저장 (INSERT) | JpaRepository<Review, Long> 상속받아 save() 호출 시 자동으로 INSERT 쿼리 실행 |
 | ReviewService | domain.review.service | 리뷰 작성 로직 | User, Store를 조회 후 Review 객체를 생성하고 저장하는 책임 수행 |
 | StoreRepository | domain.store.repository | 가게 조회용 기본 레포지토리 | JpaRepository<Store, Long>을 상속받아 가게 데이터를 조회할 때 사용 |
+
+
+| 방법                 | 설명                               | 특징                |
+| ------------------ | -------------------------------- | ----------------- |
+| **Fetch Join**     | `join fetch`로 한 번에 연관 데이터까지 가져오기 | 페이징 불가, 데이터 중복 가능 |
+| **EntityGraph**    | `@EntityGraph`로 패치 전략 지정         | 쿼리 메서드와 함께 사용 가능  |
+| **BatchSize 설정**   | 한 번에 가져올 연관 객체 수 제한              | 대규모 데이터에서 효율적     |
+| **DTO Projection** | 필요한 데이터만 DTO로 매핑                 | API 응답 전용에 적합     |
