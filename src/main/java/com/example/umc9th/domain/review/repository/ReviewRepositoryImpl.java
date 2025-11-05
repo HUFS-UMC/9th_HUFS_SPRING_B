@@ -24,15 +24,23 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom {
         QReview review = QReview.review;
         QStore store = QStore.store;
 
+        BooleanBuilder builder = new BooleanBuilder();
+        builder.and(review.user.id.eq(userId));
+
+        if (storeName != null && !storeName.isEmpty()) {
+            builder.and(store.name.eq(storeName));
+        }
+
+        if (rating != null) {
+            builder.and(review.rating.goe(rating));
+        }
+
         return queryFactory
                 .selectFrom(review)
                 .join(review.store, store).fetchJoin()
-                .where(
-                        review.user.id.eq(userId),
-                        storeName != null ? store.name.eq(storeName) : null,
-                        rating != null ? review.rating.goe(rating) : null
-                )
+                .where(builder)
                 .orderBy(review.createdAt.desc())
                 .fetch();
     }
+
 }
