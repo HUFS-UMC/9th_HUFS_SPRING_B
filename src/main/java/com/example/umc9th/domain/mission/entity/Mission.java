@@ -34,5 +34,6 @@ public class Mission extends BaseEntity {
 
     // UserMission (1:N)
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<UserMission> userMissions = new ArrayList<>();
 }

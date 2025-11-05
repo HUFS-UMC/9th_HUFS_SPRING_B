@@ -56,6 +56,7 @@ public class User extends BaseEntity {
 
     //
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 
     // 단방향 1:1 (User → UserConsent)
@@ -65,10 +66,12 @@ public class User extends BaseEntity {
 
     // cascade는 일단 안함
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
     private List<UserAlarm> userAlarms = new ArrayList<>();
 
     // 1:n pointHistory
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
+    @Builder.Default
     private List<PointHistory> pointHistories = new ArrayList<>();
 
     // --- 편의 메서드 ---

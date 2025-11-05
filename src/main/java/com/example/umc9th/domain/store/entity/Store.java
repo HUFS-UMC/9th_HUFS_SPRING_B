@@ -38,6 +38,7 @@ public class Store extends BaseEntity {
 
     // 리뷰 (1:N)
     @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 
     // 단방향 설계를 위해 주석처리 포인트 내역 (1:N)
