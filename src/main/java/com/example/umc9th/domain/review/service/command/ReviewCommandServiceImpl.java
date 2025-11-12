@@ -1,4 +1,4 @@
-package com.example.umc9th.domain.review.service;
+package com.example.umc9th.domain.review.service.command;
 
 import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.review.repository.ReviewRepository;
@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ReviewService {
+public class ReviewCommandServiceImpl implements ReviewCommandService {
 
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
 
+    @Override
     public void createReview() {
         User user = userRepository.findById(1L).orElseThrow();
         Store store = storeRepository.findById(3L).orElseThrow();
