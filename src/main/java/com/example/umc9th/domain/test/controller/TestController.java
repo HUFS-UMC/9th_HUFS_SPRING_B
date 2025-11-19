@@ -18,7 +18,7 @@ public class TestController {
     public ApiResponse<TestResDTO.Testing> test() {
 
         return ApiResponse.onSuccess(
-                GeneralSuccessCode.OK,
+                GeneralSuccessCode.SUCCESS,
                 TestConverter.toTestingDTO("This is Test!")
         );
     }

@@ -30,7 +30,7 @@ public class ReviewController {
             @RequestParam(required = false) Double rating
     ) {
         List<ReviewResponse> reviews = reviewQueryService.getMyReviews(userId, storeName, rating);
-        return ApiResponse.onSuccess(GeneralSuccessCode.OK, reviews);
+        return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, reviews);
     }
 
     /**
@@ -40,6 +40,6 @@ public class ReviewController {
     @PostMapping("/create")
     public ApiResponse<Void> createReview() {
         reviewCommandService.createReview();
-        return ApiResponse.onSuccess(GeneralSuccessCode.OK, null);
+        return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, null);
     }
 }
