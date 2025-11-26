@@ -1,6 +1,6 @@
-package com.example.umc9th.domain.user.controller;
+package com.example.umc9th.domain.mission.controller;
 
-import com.example.umc9th.domain.mission.dto.UserMissionProgressResponse;
+import com.example.umc9th.domain.mission.dto.MissionListResponse;
 import com.example.umc9th.domain.mission.exception.MissionSuccessCode;
 import com.example.umc9th.domain.mission.service.query.MissionQueryService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
@@ -13,24 +13,31 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/users")
-public class UserMissionRestController {
+@RequestMapping("/stores")
+public class MissionQueryController {
 
     private final MissionQueryService missionQueryService;
 
-    @Operation(summary = "진행중인 미션 조회 API", description = "userId 기준으로 유저가 진행중인 미션을 페이징 조회합니다.")
+
+    @Operation(
+            summary = "특정 가게 미션 목록 조회 API",
+            description = "storeId 기준으로 해당 가게의 미션을 10개씩 페이징 조회합니다."
+    )
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "유저 없음")
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "가게 없음")
     })
-    @GetMapping("/{userId}/missions/progress")
-    public ApiResponse<Page<UserMissionProgressResponse>> getMyMissionProgress(
-            @PathVariable Long userId,
+    @GetMapping("/{storeId}/missions")
+    public ApiResponse<Page<MissionListResponse>> getStoreMissions(
+            @PathVariable Long storeId,
             @PositivePage Integer page     // 🔥 RequestParam 대신 여기에 적용!
     ) {
-        Page<UserMissionProgressResponse> result =
-                missionQueryService.getMyMissionInProgress(userId, page);
+        Page<MissionListResponse> result =
+                missionQueryService.getMissionListByStore(storeId, page);
 
-        return ApiResponse.onSuccess(MissionSuccessCode.FOUND_IN_PROGRESS_MISSIONS, result);
+        return ApiResponse.onSuccess(MissionSuccessCode.FOUND_MISSIONS, result);
     }
+
+
 }
+

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stores/reviews")
-public class ReviewRestController {
+public class StoreReviewQueryController {
 
     private final ReviewQueryService reviewQueryService;
 

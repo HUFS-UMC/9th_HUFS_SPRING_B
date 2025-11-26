@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor  // JPA 직렬화용
-public class UserMissionResponse {
+public class UserMissionStatusResponse {
 
     private Integer rewardPoint;
     private String storeName;
     private MissionStatus status;
 
     // JPQL new 연산자에 맞는 생성자
-    public UserMissionResponse(Integer rewardPoint, String storeName, MissionStatus status) {
+    public UserMissionStatusResponse(Integer rewardPoint, String storeName, MissionStatus status) {
         this.rewardPoint = rewardPoint;
         this.storeName = storeName;
         this.status = status;

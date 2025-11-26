@@ -1,7 +1,7 @@
 package com.example.umc9th.domain.mission.repository;
 
 import com.example.umc9th.domain.mission.dto.UserMissionProgressResponse;
-import com.example.umc9th.domain.mission.dto.UserMissionResponse;
+import com.example.umc9th.domain.mission.dto.UserMissionStatusResponse;
 import com.example.umc9th.domain.user.entity.mapping.UserMission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +18,7 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             "JOIN m.store s " +
             "WHERE um.user.id = :userId " +
             "ORDER BY um.mission.id DESC")
-    Page<UserMissionResponse> findUserMissions(@Param("userId") Long userId, Pageable pageable);
+    Page<UserMissionStatusResponse> findUserMissions(@Param("userId") Long userId, Pageable pageable);
 
     @Query("""
        SELECT new com.example.umc9th.domain.mission.dto.UserMissionProgressResponse(
