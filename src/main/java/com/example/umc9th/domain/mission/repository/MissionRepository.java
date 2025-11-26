@@ -22,4 +22,17 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
             @Param("regionName") String regionName,
             Pageable pageable
     );
+
+    @Query("""
+       SELECT new com.example.umc9th.domain.mission.dto.MissionListResponse(
+              m.id, m.title, m.rewardPoint, s.name, s.address)
+       FROM Mission m
+       JOIN m.store s
+       WHERE s.id = :storeId
+       ORDER BY m.createdAt DESC
+       """)
+    Page<MissionListResponse> findMissionsByStoreId(
+            @Param("storeId") Long storeId,
+            Pageable pageable
+    );
 }
