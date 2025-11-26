@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class UserMissionProgressResponse {
+
     private Long missionId;
     private String title;
     private Integer rewardPoint;

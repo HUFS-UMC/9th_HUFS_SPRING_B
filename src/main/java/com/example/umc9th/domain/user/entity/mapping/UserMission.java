@@ -21,7 +21,6 @@ public class UserMission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 미션 상태 (ENUM으로 관리 권장)
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private MissionStatus status;
@@ -32,13 +31,22 @@ public class UserMission extends BaseEntity {
     @Column(name = "completed_at")
     private LocalDateTime completedAt;
 
-    // User (N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Mission (N:1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
+
+
+    /** 🔥 상태 변경 메서드 추가 */
+    public void updateStatus(MissionStatus status) {
+        this.status = status;
+    }
+
+    /** 🔥 완료 시간 업데이트 */
+    public void setCompletedAt(LocalDateTime completedAt) {
+        this.completedAt = completedAt;
+    }
 }

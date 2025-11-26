@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserMissionRepository extends JpaRepository<UserMission, Long> {
 
-    @Query("SELECT new com.example.umc9th.domain.mission.dto.UserMissionResponse(" +
+    @Query("SELECT new com.example.umc9th.domain.mission.dto.UserMissionStatusResponse(" +
             "m.rewardPoint, s.name, um.status) " +
             "FROM UserMission um " +
             "JOIN um.mission m " +

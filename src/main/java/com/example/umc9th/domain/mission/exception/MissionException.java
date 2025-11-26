@@ -1,10 +1,15 @@
 package com.example.umc9th.domain.mission.exception;
 
 import com.example.umc9th.global.apiPayload.code.BaseErrorCode;
-import com.example.umc9th.global.apiPayload.exception.GeneralException;
+import lombok.Getter;
 
-public class MissionException extends GeneralException {
+@Getter
+public class MissionException extends RuntimeException {
+
+    private final BaseErrorCode errorCode;
+
     public MissionException(BaseErrorCode errorCode) {
-        super(errorCode);
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
     }
 }

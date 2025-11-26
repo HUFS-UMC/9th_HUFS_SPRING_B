@@ -9,7 +9,10 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum MissionErrorCode implements BaseErrorCode {
 
-    NOT_FOUND_MISSIONS(HttpStatus.NOT_FOUND, "MISSION404_1", "해당 가게의 미션을 찾을 수 없습니다.");
+    NOT_FOUND_MISSIONS(HttpStatus.NOT_FOUND, "MISSION404_1", "해당 가게의 미션을 찾을 수 없습니다."),
+    NOT_FOUND_USER_MISSION(HttpStatus.NOT_FOUND, "MISSION404_2", "유저 미션을 찾을 수 없습니다."),
+    USER_MISSION_NOT_OWNED(HttpStatus.FORBIDDEN, "MISSION403_1", "해당 미션은 사용자 소유가 아닙니다."),
+    ALREADY_COMPLETED(HttpStatus.BAD_REQUEST, "MISSION400_1", "이미 완료된 미션입니다.");
 
     private final HttpStatus status;
     private final String code;

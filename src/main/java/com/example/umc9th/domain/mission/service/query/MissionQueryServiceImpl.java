@@ -20,30 +20,30 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     private final StoreRepository storeRepository;
     private final UserMissionRepository userMissionRepository;
 
+    private PageRequest toPageable(Integer page) {
+        return PageRequest.of(page - 1, 10);
+    }
+
     /** 지역 기반 미션 조회 */
     @Override
     public Page<MissionListResponse> getMissionListByRegion(String regionName, Integer page) {
-        PageRequest pageable = PageRequest.of(page - 1, 10);
-        return missionRepository.findMissionsByRegion(regionName, pageable);
+        return missionRepository.findMissionsByRegion(regionName, toPageable(page));
     }
 
     /** 가게 기반 미션 조회 */
     @Override
     public Page<MissionListResponse> getMissionListByStore(Long storeId, Integer page) {
-
-        storeRepository.findById(storeId)
-                .orElseThrow(() -> new StoreException(StoreErrorCode.NOT_FOUND));
-
-        PageRequest pageable = PageRequest.of(page - 1, 10);
-        return missionRepository.findMissionsByStoreId(storeId, pageable);
+        if (!storeRepository.existsById(storeId)) {
+            throw new StoreException(StoreErrorCode.NOT_FOUND);
+        }
+        return missionRepository.findMissionsByStoreId(storeId, toPageable(page));
     }
 
+    /** 유저 진행중 미션 조회 */
     @Override
     public Page<UserMissionProgressResponse> getMyMissionInProgress(Long userId, Integer page) {
-        PageRequest pageable = PageRequest.of(page - 1, 10);
-        return userMissionRepository.findUserMissionInProgress(userId, pageable);
+        return userMissionRepository.findUserMissionInProgress(userId, toPageable(page));
     }
-
-
 }
+
 

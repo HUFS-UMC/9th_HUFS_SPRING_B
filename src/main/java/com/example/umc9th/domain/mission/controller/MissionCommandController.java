@@ -2,7 +2,6 @@ package com.example.umc9th.domain.mission.controller;
 
 import com.example.umc9th.domain.mission.dto.MissionCreateRequest;
 import com.example.umc9th.domain.mission.dto.MissionCreateResponse;
-import com.example.umc9th.domain.mission.dto.UserMissionChallengeRequest;
 import com.example.umc9th.domain.mission.dto.UserMissionChallengeResponse;
 import com.example.umc9th.domain.mission.service.command.MissionCommandService;
 import com.example.umc9th.domain.mission.service.command.UserMissionCommandService;
@@ -21,7 +20,6 @@ public class MissionCommandController {
 
     /**
      * 가게에 미션 추가하기
-     * POST /api/missions/{storeId}
      */
     @PostMapping("/{storeId}")
     public ApiResponse<MissionCreateResponse> createMission(
@@ -33,15 +31,17 @@ public class MissionCommandController {
     }
 
     /**
-     * 미션 도전하기
-     * POST /api/missions/{storeId}/challenge
+     * 미션 도전하기 (challenge)
      */
-    @PostMapping("/{storeId}/challenge")
+    @PostMapping("/{storeId}/missions/{missionId}/challenge")
     public ApiResponse<UserMissionChallengeResponse> challengeMission(
             @PathVariable Long storeId,
-            @RequestBody UserMissionChallengeRequest request
+            @PathVariable Long missionId
     ) {
-        UserMissionChallengeResponse response = userMissionCommandService.requestMission(storeId, request);
+        UserMissionChallengeResponse response =
+                userMissionCommandService.requestMission(storeId, missionId);
+
         return ApiResponse.onSuccess(GeneralSuccessCode.SUCCESS, response);
     }
 }
+
