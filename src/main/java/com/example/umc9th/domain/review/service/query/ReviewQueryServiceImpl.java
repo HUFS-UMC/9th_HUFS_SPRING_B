@@ -61,4 +61,19 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
         // 변환 후 반환
         return ReviewConverter.toReviewPreviewListDTO(result);
     }
+
+    /**
+     * ✅ 새 기능 — 내가 작성한 리뷰 목록 조회 (페이징, 10개씩)
+     */
+    @Override
+    public ReviewResDTO.ReviewPreViewListDTO findMyReviews(Long userId, Integer page) {
+
+        // page 는 프론트에서 1부터 보내므로 -1
+        PageRequest pageable = PageRequest.of(page - 1, 10);
+
+        Page<Review> result = reviewRepository.findAllByUser_Id(userId, pageable);
+
+        // Converter 이용해서 DTO로 변환
+        return ReviewConverter.toReviewPreviewListDTO(result);
+    }
 }
