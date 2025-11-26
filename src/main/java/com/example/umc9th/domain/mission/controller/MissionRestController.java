@@ -4,6 +4,7 @@ import com.example.umc9th.domain.mission.dto.MissionListResponse;
 import com.example.umc9th.domain.mission.exception.MissionSuccessCode;
 import com.example.umc9th.domain.mission.service.query.MissionQueryService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
+import com.example.umc9th.global.resolver.PositivePage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class MissionRestController {
     @GetMapping("/{storeId}/missions")
     public ApiResponse<Page<MissionListResponse>> getStoreMissions(
             @PathVariable Long storeId,
-            @RequestParam(defaultValue = "1") Integer page
+            @PositivePage Integer page     // 🔥 RequestParam 대신 여기에 적용!
     ) {
         Page<MissionListResponse> result =
                 missionQueryService.getMissionListByStore(storeId, page);

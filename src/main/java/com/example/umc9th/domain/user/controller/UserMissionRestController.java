@@ -4,6 +4,7 @@ import com.example.umc9th.domain.mission.dto.UserMissionProgressResponse;
 import com.example.umc9th.domain.mission.exception.MissionSuccessCode;
 import com.example.umc9th.domain.mission.service.query.MissionQueryService;
 import com.example.umc9th.global.apiPayload.ApiResponse;
+import com.example.umc9th.global.resolver.PositivePage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class UserMissionRestController {
     @GetMapping("/{userId}/missions/progress")
     public ApiResponse<Page<UserMissionProgressResponse>> getMyMissionProgress(
             @PathVariable Long userId,
-            @RequestParam(defaultValue = "1") Integer page
+            @PositivePage Integer page     // 🔥 RequestParam 대신 여기에 적용!
     ) {
         Page<UserMissionProgressResponse> result =
                 missionQueryService.getMyMissionInProgress(userId, page);
