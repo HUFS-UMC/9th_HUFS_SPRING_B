@@ -2,7 +2,7 @@ package com.example.umc9th.domain.review.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
+// 리뷰 조회 api
 @Getter
 @AllArgsConstructor
 public class ReviewResponse {
