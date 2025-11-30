@@ -1,41 +1,54 @@
-## 📝 작업 내용 요약
 
+## 📌 작업 내용
 
-- 특정 가게에 리뷰 추가 API 구현
-  → 유저/가게 조회 후 Review 생성, ApiResponse 통일 적용
-- 특정 가게에 미션 추가 API 구현
-  → StoreId로 가게 조회 후 Mission 생성, DTO 및 응답 구조 정리
-- 유저가 특정 미션에 도전하기 API 구현
-  → Mission & User 조회 후 UserMission 생성, 중복 도전 방지 로직 포함
-- Query/Command 서비스 분리 적용
-  → 리뷰 조회/생성 구조를 CQRS 스타일로 리팩토링
-- Controller 의존성 개선
-  → ServiceImpl 직접 참조 제거, 인터페이스 기반 구조로 변경하여 확장성 향상
+- @ValidPage 커스텀 Validation 어노테이션 구현
 
-## 💡 과제 피드백 & 배운 점
-- 기존 컨트롤러가 ServiceImpl에 직접 의존하고 있어 확장성 저하 문제가 있었음
-  → 인터페이스 계층을 도입하여 유연한 구조로 개선
+    - PageValidator 연동, 페이지 번호(1 이상) 검증
 
-- Query / Command 분리 원칙을 적용하면서, 서비스 단의 역할이 명확해짐
-  → “읽기/쓰기 책임 분리 (CQRS)” 개념을 실무적으로 이해
+    - GlobalExceptionHandler에서 Validation 예외 자동 처리
 
-- RestControllerAdvice를 통한 전역 예외 처리 통합의 이점을 체감
-  → 예외 발생 시에도 응답 구조가 일관되어 프론트엔드 협업 시 디버깅이 용이해짐
+- 미션 관련 API 3개 구현
 
-- ApiResponse 구조가 팀 내 표준화된 응답 규격 역할을 하여
-  → 성공/실패 여부, 코드, 메시지, 결과를 한눈에 파악할 수 있음
+    - GET /stores/{storeId}/missions — 특정 가게의 미션 목록 조회 (최신순, 10개 페이징)
 
-## 🔗 구현구조
-| 클래스명                                                  | 패키지 경로                          | 역할                           |
-| ----------------------------------------------------- | ------------------------------- | ---------------------------- |
-| **ReviewController**                                  | `domain.review.controller`      | 리뷰 조회/생성 API 엔드포인트 제공        |
-| **ReviewQueryService**                                | `domain.review.service.query`   | 리뷰 조회 인터페이스                  |
-| **ReviewQueryServiceImpl**                            | `domain.review.service.query`   | 리뷰 조회 로직 구현체                 |
-| **ReviewCommandService**                              | `domain.review.service.command` | 리뷰 생성/수정/삭제 인터페이스            |
-| **ReviewCommandServiceImpl**                          | `domain.review.service.command` | 리뷰 생성 로직 구현체                 |
-| **MissionController**                                 | `domain.mission.controller`     | 미션 생성/도전 API 엔드포인트 제공        |
-| **MissionService**                                    | `domain.mission.service`        | 미션 생성/도전 인터페이스               |
-| **MissionServiceImpl**                                | `domain.mission.service`        | 미션 생성 및 UserMission 생성 로직 구현 |
-| **UserMissionResponse / UserMissionChallengeRequest** | `domain.mission.dto`            | 미션 도전 요청 및 응답 DTO            |
-| **ApiResponse**                                       | `global.apiPayload`             | 성공/실패 응답 포맷 표준화              |
-| **GeneralExceptionAdvice**                            | `global.apiPayload.handler`     | 전역 예외 처리 담당                  |
+    - GET /users/{userId}/missions/in-progress — 내가 진행 중인 미션 조회 (IN_PROGRESS 필터링, 페이징)
+
+    - PATCH /users/{userId}/missions/{userMissionId}/complete — 미션 완료 처리(상태 COMPLETED & 완료 시간 업데이트)
+    - 내가 작성한 리뷰 목록
+- 리뷰 API 개선
+
+    - 리뷰 응답에 ownerReply(사장님 답글) 필드 추가
+
+    - OwnerReply → Reply로 통합해 중복 제거
+
+    - 사장님 댓글 조건: UserRole.OWNER + parent == null
+
+- 페이징 처리 개선
+
+    - 프론트는 1-based, 백엔드는 0-based로 통일된 변환 처리
+
+    - ReviewSearchRequest, MissionPageRequest에 @ValidPage 적용
+
+- Swagger 문서화 강화
+
+    - @Operation, @ApiResponses 작성
+
+    - 요청/응답 스펙 및 상태 코드 명세 추가
+
+- 코드 리팩터링
+
+    - ReviewServiceImpl 반복문 → Stream API 변환
+
+    - Converter 계층에도 Stream API 적용
+
+    - DTO Builder 패턴 일관성 유지
+
+## 💡 배운 점 / 느낀 점
+
+- 커스텀 Validation을 통해 재사용 가능한 입력 검증 구조를 설계할 수 있었다.
+
+- 페이징 1-based ↔ 0-based 변환을 API 전반에서 일관되게 처리하는 것이 중요함을 이해했다.
+
+- DTO 구조는 중복을 줄이는 방향이 유지보수성과 확장성을 높인다는 점을 경험했다.
+
+- Stream API를 적용해 코드 가독성과 선언적 스타일의 장점을 체감했다.
