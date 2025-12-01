@@ -6,6 +6,7 @@ import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.user.entity.mapping.PreferredFood;
 import com.example.umc9th.domain.user.entity.mapping.UserMission;
 import com.example.umc9th.domain.user.enums.Gender;
+import com.example.umc9th.global.auth.enums.Role;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +31,9 @@ public class User extends BaseEntity {
 
     @Column(length = 255, nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "name", length = 10, nullable = false)
     private String name;
