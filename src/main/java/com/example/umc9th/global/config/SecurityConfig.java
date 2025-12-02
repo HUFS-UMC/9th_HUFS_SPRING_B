@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final String[] allowUris = {
+            "/h2-console/**", // h2 console 허용 배포시 삭제
             "/users/sign-up",
             "/swagger-ui/**", // Swagger 허용
             "/swagger-resources/**",
@@ -32,6 +33,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .csrf(csrf -> csrf.disable()) // post 문제 해결
+                .headers(headers -> headers.frameOptions(frame -> frame.disable())) // H2 콘솔 허용 배포시 삭제
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
@@ -42,6 +44,6 @@ public class SecurityConfig {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();   // 🔥 PasswordEncoder Bean 등록
+        return new BCryptPasswordEncoder();   //  PasswordEncoder Bean 등록
     }
 }
