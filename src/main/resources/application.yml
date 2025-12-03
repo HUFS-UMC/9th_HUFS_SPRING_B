@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: "umc9th"
+
+  # .env 파일 로드
+  config:
+    import: "optional:file:.env"
+
+  profiles:
+    active: local  # 기본 실행 환경 → H2(local)

@@ -1,3 +1,5 @@
+HELP.md
+
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -5,6 +7,7 @@ build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+.idea
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
@@ -28,6 +31,18 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -40,3 +55,19 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# QueryDSL (Q클래스) 자동 생성 폴더 무시 설정
+
+# build/generated/querydsl 폴더 전체 제외
+/build/generated/querydsl/
+
+# 또는 다른 경로에 QClass가 생긴다면 (예: build/querydsl)
+# /build/querydsl/
+
+# QClass 예시:
+#   build/generated/querydsl/com/example/domain/QReview.java
+#   build/generated/querydsl/com/example/domain/QStore.java
+#
+
+### env파일 ###
+.env
