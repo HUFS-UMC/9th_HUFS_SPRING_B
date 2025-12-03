@@ -9,8 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
-@Configuration
-public class SecurityConfig {
+//@Configuration
+public class SecurityConfig_Session {
 
     private final String[] allowUris = {
             "/h2-console/**", // h2 console 허용 배포시 삭제

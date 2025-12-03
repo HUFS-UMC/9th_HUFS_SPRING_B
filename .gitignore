@@ -68,3 +68,6 @@ bin/
 #   build/generated/querydsl/com/example/domain/QReview.java
 #   build/generated/querydsl/com/example/domain/QStore.java
 #
+
+### env파일 ###
+.env
